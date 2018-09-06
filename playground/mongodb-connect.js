@@ -1,4 +1,11 @@
-const MongoClient = require('mongodb').MongoClient;
+// const MongoClient = require('mongodb').MongoClient;
+
+const {MongoClient, ObjectID} = require('mongodb');
+
+var obj = new ObjectID();
+console.log(obj);
+
+
 
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) =>{
   if (err) {
@@ -17,15 +24,16 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) =>{
   // });
 /// insert new doc into users (name, age, location)
 
-  db.collection('Users').insertOne({
-    name: 'Dan',
-    age: '30',
-    location: 'Somerville'
-  }, (err, result) => {
-    if (err) {
-      return console.log('Unable to connect to mongo');
-    }
-    console.log(JSON.stringify(result.ops, undefined, 2))
-  });
-  db.close();
+//   db.collection('Users').insertOne({
+//     name: 'Dan',
+//     age: '30',
+//     location: 'Somerville'
+//   }, (err, result) => {
+//     if (err) {
+//       return console.log('Unable to connect to mongo');
+//     }
+//     console.log(result.ops[0]._id.getTimestamp()
+//     )
+//   });
+//   db.close();
 });

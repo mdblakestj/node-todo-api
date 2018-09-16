@@ -54,6 +54,17 @@ app.get("/todos/:id", (req, res) => {
   //400 - and send empty body back
 });
 
+app.delete("/todos/:id", (req, res) => {
+  //get the id
+  //validate - not valid return 404
+  //remove todo by id
+  //Success
+  // if o doc send 404
+  //if doc send doc with a 200
+  //error
+  //respond with 400 with empty body
+});
+
 app.get("/todos", (req, res) => {
   Todo.find().then(
     todos => {

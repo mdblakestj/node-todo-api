@@ -11,7 +11,7 @@ var { Users } = require("./models/user");
 var app = express();
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 app.post("/todos", (req, res) => {
   var todo = new Todo({
@@ -27,8 +27,6 @@ app.post("/todos", (req, res) => {
     }
   );
 });
-
-//GET /todos/1213212124
 
 app.get("/todos/:id", (req, res) => {
   var id = req.params.id;
@@ -47,22 +45,23 @@ app.get("/todos/:id", (req, res) => {
       res.status(400).send();
     }
   );
-  //Success
-  // if todo - send it back
-  // if no todo - send back 404 with empty bod
-  //error;
-  //400 - and send empty body back
 });
 
 app.delete("/todos/:id", (req, res) => {
-  //get the id
-  //validate - not valid return 404
-  //remove todo by id
-  //Success
-  // if o doc send 404
-  //if doc send doc with a 200
-  //error
-  //respond with 400 with empty body
+  var id = req.params.id;
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+  Todo.findByIdAndRemove(id)
+    .then(todo => {
+      if (!todo) {
+        return res.status(404).send();
+      }
+      res.send(todo);
+    })
+    .catch(e => {
+      res.status(400).send();
+    });
 });
 
 app.get("/todos", (req, res) => {
